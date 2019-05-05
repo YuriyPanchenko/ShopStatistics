@@ -3,13 +3,17 @@ package com.example.shop.controllers;
 
 import com.example.shop.model.Goods;
 import com.example.shop.repos.GoodsRepository;
+import com.example.shop.servise.CurrencyApiService;
+import com.example.shop.servise.impl.CurrencyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.time.Instant;
+import java.time.temporal.ChronoField;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -21,6 +25,9 @@ public class GoodsController {
 
     @Autowired
     private DateFormat instantDateFormat;
+    
+    @Autowired
+    private CurrencyApiService currencyApiService;
 
     @GetMapping(path = "/")
     public String idx(){
@@ -86,6 +93,23 @@ public class GoodsController {
         goodsRepository.deleteAllByDate(time);
 
         return "index";
+    }
+
+    @GetMapping(path = "/totalYearProfit")
+    public String totalYearProfit(){
+        return "/totalProfit";
+    }
+
+    @PostMapping(path = "/totalYearProfit")
+    public String showYearProfit(@RequestParam String currency, @RequestParam int year, Map<String, Object> model){
+
+        List <Goods> goods = (List<Goods>) goodsRepository.findAll();
+        double total = goods.stream()
+//                .filter(c -> c.getDate().get(ChronoField.YEAR) == year)
+                .map(x -> x.getPrice()*currencyApiService.getPrice(currency, x.getCurency(), x.getDate()))
+                .reduce(0d, (a, b) -> a + b);
+        model.put("total", total);
+            return "totalProfit";
     }
 
 

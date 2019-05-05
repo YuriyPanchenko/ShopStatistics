@@ -30,11 +30,7 @@ public class Goods {
     public Goods() {
     }
 
-    public Goods(String name, double price, String curency) {
-        this.name = name;
-        this.price = price;
-        this.curency = curency;
-    }
+
     public Instant getDate() {
         return date;
     }

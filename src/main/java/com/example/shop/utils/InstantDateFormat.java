@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.TimeZone;
 
 @Configuration
 public class InstantDateFormat {
@@ -15,6 +17,14 @@ public class InstantDateFormat {
 
     @Bean
     DateFormat simpleDateFormat() {
-        return new SimpleDateFormat(format);
+        SimpleDateFormat formatObj = new SimpleDateFormat(format);
+        formatObj.setTimeZone(TimeZone.getTimeZone("GMT+0"));
+        return formatObj;
+
+    }
+
+    @Bean
+    DateTimeFormatter dateTimeFormatter() {
+        return DateTimeFormatter.ofPattern(format);
     }
 }
