@@ -1,37 +1,30 @@
 <html>
-
 <body>
-<div>
+<link href="bootstrap-4.0.0-dist/css/bootstrap.min.css">
     <form method="post">
-        <input type="text" name="name" placeholder="Name of goods" />
-        <input type="number" name="price" placeholder="price">
-        <input type="date" name="date" placeholder="date">
-        <select name="currency" size="4" multiple>
-            <option>UAH</option>
-            <option>USD</option>
-            <option>EUR</option>
-            <option>RUB</option>
-        </select>
-        <button type="submit">add</button>
+                <input type="text" name="name" placeholder="Name of goods" />
+                <input type="number" name="price" placeholder="price">
+                <input type="date" name="date" placeholder="date">
+                <select class ="custom-select" name="currency">
+                    <option>UAH</option>
+                    <option>USD</option>
+                    <option>EUR</option>
+                    <option>PLN</option>
+                </select>
+            <button type="submit">add</button>
     </form>
-</div>
 
 
-{{#iGoods}}
+
     <div>
-        <b>{{id}}</b>
-        <span>{{name}}</span>
-        <span>{{price}}</span>
-        <span>{{date}}</span>
-        <span>{{currency}}</span>
+        <a href="/showAllGoods">Show all goods</a>
     </div>
-{{/iGoods}}
-
-<div>
-    <a href="/showAllGoods">Show all goods</a>
-</div>
-<div>
-    <a href="/findGoods">Find by date</a>
+    <div>
+        <a href="/findGoods">Find by date</a>
+    </div>
+    <div>
+        <a href="/totalYearProfit">Total year profit</a>
+    </div>
 </div>
 </body>
 </html>

@@ -92,7 +92,7 @@ public class GoodsController {
         Instant time = instantDateFormat.parse(date).toInstant();
         goodsRepository.deleteAllByDate(time);
 
-        return "index";
+        return "findByDate";
     }
 
     @GetMapping(path = "/totalYearProfit")
@@ -101,11 +101,11 @@ public class GoodsController {
     }
 
     @PostMapping(path = "/totalYearProfit")
-    public String showYearProfit(@RequestParam String currency, @RequestParam int year, Map<String, Object> model){
+    public String showYearProfit(@RequestParam String currency, @RequestParam String year, Map<String, Object> model){
 
         List <Goods> goods = (List<Goods>) goodsRepository.findAll();
         double total = goods.stream()
-//                .filter(c -> c.getDate().get(ChronoField.YEAR) == year)
+                .filter(c -> c.getDate().toString().substring(0, 4).equals(year))/*get(ChronoField.YEAR)*/
                 .map(x -> x.getPrice()*currencyApiService.getPrice(currency, x.getCurency(), x.getDate()))
                 .reduce(0d, (a, b) -> a + b);
         model.put("total", total);
