@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.time.Instant;
 
 @Entity
@@ -12,31 +13,19 @@ public class Goods {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String name;
     private double price;
     private Instant date;
-
-
-    private String curency;
-
-    public Goods(String name, double price, Instant date, String curency) {
-        this.name = name;
-        this.price = price;
-        this.date = date;
-        this.curency = curency;
-    }
+    private String currency;
 
     public Goods() {
     }
 
-
-    public Instant getDate() {
-        return date;
-    }
-
-    public void setDate(Instant date) {
+    public Goods(String name, double price, Instant date, String currency) {
+        this.name = name;
+        this.price = price;
         this.date = date;
+        this.currency = currency;
     }
 
     public long getId() {
@@ -63,25 +52,25 @@ public class Goods {
         this.price = price;
     }
 
-    public String getCurency() {
-        return curency;
+    public Instant getInstantDate() {
+        return date;
     }
 
-    public void setCurency(String curency) {
-        this.curency = curency;
+    public String getDate() {
+        return date.toString().replaceAll("T00:00:00Z","");
     }
 
-
-
-    @Override
-    public String toString() {
-        return "Goods{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", date=" + date +
-                ", curency='" + curency + '\'' +
-                '}';
+    public void setDate(Instant date) {
+        this.date = date;
     }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
 
 }

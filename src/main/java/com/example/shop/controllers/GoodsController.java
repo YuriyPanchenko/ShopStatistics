@@ -4,16 +4,13 @@ package com.example.shop.controllers;
 import com.example.shop.model.Goods;
 import com.example.shop.repos.GoodsRepository;
 import com.example.shop.servise.CurrencyApiService;
-import com.example.shop.servise.impl.CurrencyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.time.Instant;
-import java.time.temporal.ChronoField;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -48,15 +45,6 @@ public class GoodsController {
 
 
     }
-
-    /*@PostMapping(path="/filter")
-    public @ResponseBody
-    ModelAndView getAllGoods(@RequestBody String filter) {
-        // This returns a JSON or XML with the users
-
-        Iterable<Goods> all = goodsRepository.findAll();
-        return new ModelAndView("allGoods.mustache", Collections.singletonMap("list", all));
-    }*/
 
     @GetMapping(path = "/showAllGoods")
     public String sortedAllGoods(Map<String, Object> model){
@@ -106,9 +94,10 @@ public class GoodsController {
         List <Goods> goods = (List<Goods>) goodsRepository.findAll();
         double total = goods.stream()
                 .filter(c -> c.getDate().toString().substring(0, 4).equals(year))/*get(ChronoField.YEAR)*/
-                .map(x -> x.getPrice()*currencyApiService.getPrice(currency, x.getCurency(), x.getDate()))
+                .map(x -> x.getPrice()*currencyApiService.getPrice(x.getCurrency(), currency, x.getInstantDate()))
                 .reduce(0d, (a, b) -> a + b);
-        model.put("total", total);
+        model.put("total", Math.round(total));
+        model.put("currency", currency);
             return "totalProfit";
     }
 
