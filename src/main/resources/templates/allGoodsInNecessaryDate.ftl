@@ -12,9 +12,10 @@
 <#if dateList??>
 
 <#else>
-    <form action="/deleteByDate/${date}" method="POST">
-        <input type="submit" name="Delete" value="Delete" />
-    </form>
+
 </#if>
 
+    <form action="/deleteByDate/${date}" method="POST">
+        <input type="submit" name="Delete" value="Delete all" />
+    </form>
 </@common.page>

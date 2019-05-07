@@ -28,6 +28,12 @@ public class Goods {
         this.currency = currency;
     }
 
+    public Goods(double price, Instant date, String currency) {
+        this.price = price;
+        this.date = date;
+        this.currency = currency;
+    }
+
     public long getId() {
         return id;
     }
