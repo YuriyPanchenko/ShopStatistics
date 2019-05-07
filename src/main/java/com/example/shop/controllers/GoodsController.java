@@ -32,6 +32,7 @@ public class GoodsController {
 
     }
 
+
     @PostMapping("/")
     public String addNewGoods(@RequestParam String name,
                               @RequestParam double price,
