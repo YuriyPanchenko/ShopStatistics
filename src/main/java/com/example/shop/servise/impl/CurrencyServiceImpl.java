@@ -87,7 +87,7 @@ public class CurrencyServiceImpl implements CurrencyApiService {
             if(to.equals("EUR")){
                 return 1/exchangeRates.get(from);
             }
-            return exchangeRates.get(from)/exchangeRates.get(to);
+            return exchangeRates.get(to)/exchangeRates.get(from);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
