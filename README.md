@@ -2,7 +2,6 @@ Stack of technologies:
 Java 8(Frameworks: Spring Boot),
 MySQL(version 5.1.38),
 FreeMarker,
-Html,
 Css(Bootstrap 4).
 
 
@@ -15,9 +14,8 @@ Instruction to building project:
 
 
 
-
 Instruction to use project:
-1)Go to "localhost:8080" in browser,
+1)Go to "localhost:8080" or web-site: https://shopstatistic.herokuapp.com/ in browser,
 2)In this page you can add new goods,
 3)In top part of site you can see menu
 4)Click "All Goods" in the menu to see All goods,
