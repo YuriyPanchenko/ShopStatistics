@@ -45,23 +45,28 @@ public class CurrencyServiceImpl implements CurrencyApiService {
 
     }
 
+    protected String getResponseBody(Instant forDate) throws IOException {
+        String urlString = buildUrl(forDate);
+
+        URL url = new URL(urlString);
+        URLConnection connection = url.openConnection();
+
+
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(connection.getInputStream()));
+        String responseBody = in.lines().collect(Collectors.joining());
+        in.close();
+
+        return responseBody;
+    }
+
     @Override
     public double getPrice(String from, String to, Instant date) {
         if (to.equals(from))
             return 1;
 
-        String urlString = buildUrl(date);
         try {
-
-            StringBuilder result = new StringBuilder();
-            URL url = new URL(urlString);
-            URLConnection connection = url.openConnection();
-
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()));
-            String responseBody = in.lines().collect(Collectors.joining());
-            in.close();
+            String responseBody = getResponseBody(date);
 
             Map<String, Double> exchangeRates = new HashMap<>();
             //in this try we can catch not arrived date(we don't add price to total profit)
@@ -75,7 +80,7 @@ public class CurrencyServiceImpl implements CurrencyApiService {
                             Double rate = jsonNodeEntry.getValue().asDouble();
                             exchangeRates.put(currency, rate);
                         });
-            }catch (Exception nullPointer){
+            } catch (Exception nullPointer){
                 return 0;
             }
 
