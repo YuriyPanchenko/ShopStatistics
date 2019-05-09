@@ -26,8 +26,6 @@ public class DbConnectionConfig {
 
     @Bean
     public DataSource dataSource() {
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-
         try {
 
             URI jdbUri = new URI(System.getenv("JAWSDB_URL"));
@@ -37,14 +35,14 @@ public class DbConnectionConfig {
             String port = String.valueOf(jdbUri.getPort());
             String jdbUrl = "jdbc:mysql://" + jdbUri.getHost() + ":" + port + jdbUri.getPath();
 
-            return dataSourceBuilder
+            return DataSourceBuilder.create()
                     .url(jdbUrl)
                     .username(username)
                     .password(password)
                     .build();
 
-        } catch (URISyntaxException e) {
-            return dataSourceBuilder
+        } catch (Exception e) {
+            return DataSourceBuilder.create()
                     .url(dataSource)
                     .username(userName)
                     .password(password)
