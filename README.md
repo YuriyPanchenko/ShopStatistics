@@ -1,26 +1,23 @@
-Stack of technologies: 
-Java 8(Frameworks: Spring Boot),
-MySQL(version 5.1.38),
-FreeMarker,
-Css(Bootstrap 4).
+### Stack of technologies: 
+* Java 8 + Spring Boot
+* MySQL (v5.1.38)
+* FreeMarker
+* CSS (Bootstrap 4)
 
 
+### Building and running locally:
+1. Change username and password (optionally datasource url) in application.properties
+2. *[Optional]* Run unit tests with `mvn test`
+3. Start the application with `mvn spring-boot:run` (exploded form) or `mvn install && java -jar target/shop-1.0-SNAPSHOT.jar` (build & run separately)
 
 
-Instruction to building project:
-1)Rename username and password(may be url) in application.properties.
-2)Run application
+### Accessing on Heroku:
+An application instance is already deployed on [Heroku](https://www.heroku.com). You can access it here: https://shopstatistic.herokuapp.com.
 
-
-
-
-Instruction to use project:
-1)Go to "localhost:8080" or web-site: https://shopstatistic.herokuapp.com/ in browser,
-2)In this page you can add new goods,
-3)In top part of site you can see menu
-4)Click "All Goods" in the menu to see All goods,
-5)Click "Find Goods" in the menu to find necessary goods by date
-6)Click "Delete all" to delete all goods with this date
-7)Click "Total profit" in the menu and enter currensy and year to see total profit in necessary date.
-
+### Available views:
+* __Home page__: you can add new goods here
+* __Navbar__: navigate between all existing views
+    * __All goods__: nuff said
+    * __Find goods__: find by date, you can click *"Delete all"* button to clear all records for the selected date
+    * __Total profit__: get profit in selected currency on some date
  
