@@ -9,10 +9,10 @@
                         <input class="form-control" type="text" name="name" placeholder="Name of goods" required/>
                     </div>
                     <div >
-                        <input class="form-control" type="number" name="price" placeholder="price" required>
+                        <input class="form-control" type="number" min="0" name="price" placeholder="price" required>
                     </div>
                     <div >
-                        <input  class="form-control" type="date" name="date" placeholder="date" required>
+                        <input  class="form-control" type="date" name="date" max="${nowFormatted}" min='1996-08-26' placeholder="date" required>
                     </div>
                     <div>
                         <select class="form-control" name="currency" required>
