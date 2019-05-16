@@ -38,11 +38,12 @@ public class GoodsController {
     public String addNewGoods(@RequestParam String name,
                               @RequestParam double price,
                               @RequestParam String date,
-                              @RequestParam String currency) throws ParseException {
+                              @RequestParam String currency,
+                              Map<String , Object> model) throws ParseException {
         Date dateObj = instantDateFormat.parse(date);
         Goods goods = new Goods(name, price, dateObj.toInstant(), currency);
         goodsRepository.save(goods);
-
+        model.put("nowFormatted", instantDateFormat.format(Date.from(Instant.now())));
         return "index";
 
 
@@ -50,9 +51,9 @@ public class GoodsController {
 
     @GetMapping(path = "/showAllGoods")
     public String sortedAllGoods(Map<String, Object> model){
-        List<Goods> goods = (List<Goods>) goodsRepository.findAll();
+        List<Goods> goods = goodsRepository.findByOrderByDate();
 
-        model.put("sortedList", goods.stream().sorted(Comparator.comparing(Goods::getDate)).collect(Collectors.toList()));
+        model.put("sortedList", goods);
 
         return "sorted";
      }

@@ -11,6 +11,8 @@ public interface GoodsRepository extends CrudRepository<Goods, Integer> {
 
    List<Goods> findAllByDate( Instant date);
 
+   List<Goods> findByOrderByDate();
+
    @Transactional
    void deleteAllByDate(Instant date);
 
