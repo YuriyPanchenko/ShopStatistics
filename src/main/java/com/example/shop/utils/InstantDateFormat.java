@@ -20,8 +20,9 @@ public class InstantDateFormat {
         SimpleDateFormat formatObj = new SimpleDateFormat(format);
         formatObj.setTimeZone(TimeZone.getTimeZone("GMT+0"));
         return formatObj;
-
     }
+
+
 
     @Bean
     DateTimeFormatter dateTimeFormatter() {
