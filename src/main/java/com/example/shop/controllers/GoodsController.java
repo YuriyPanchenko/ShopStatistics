@@ -27,7 +27,8 @@ public class GoodsController {
     private CurrencyApiService currencyApiService;
 
     @GetMapping(path = "/")
-    public String idx(){
+    public String idx(Map<String, Object> model){
+        model.put("nowFormatted", instantDateFormat.format(Date.from(Instant.now())));
         return "index";
 
     }
